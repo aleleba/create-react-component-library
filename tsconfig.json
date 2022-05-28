@@ -1,0 +1,46 @@
+{
+    "compilerOptions": {
+      "target": "es5",
+      "lib": [
+        "dom",
+        "dom.iterable",
+        "esnext"
+      ],
+      "allowJs": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "noFallthroughCasesInSwitch": true,
+      "module": "esnext",
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "noEmit": false,
+      "jsx": "react-jsx",
+      "experimentalDecorators": true,
+      "esModuleInterop": true,
+      "isolatedModules": false,
+      "typeRoots" : ["./src/@types", "./node_modules/@types"],
+      "types": [
+        "react/next", 
+        "react-dom/next", 
+        "node"
+      ],
+      "sourceMap": true,
+      "baseUrl": "src",
+      "outDir": "dist",
+      "skipLibCheck": true,
+      "noImplicitAny": false,
+      "paths": {
+        "@Components/*": ["Components/*"],
+      },
+    },
+    "include": [
+      "**/*"
+    ],
+    "exclude": [
+     "node_modules",
+     "dist",
+     "PRNameGenerator.ts",
+     "src/stories/**"
+    ]
+}

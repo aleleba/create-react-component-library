@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "module": "commonjs",
+        "jsx": "preserve",
+        "strictFunctionTypes": true,
+        "paths": {
+            "@Components/*": ["../Components/*"],
+        },
+    },
+    "exclude": [
+        "node_modules",
+        "**/node_modules/*"
+    ]
+}
