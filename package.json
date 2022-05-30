@@ -2,8 +2,10 @@
   "name": "@aleleba/create-react-component-library",
   "version": "1.0.0",
   "description": "A starter kit for create a React component Library with storybook",
+  "bin": "./bin/cli.js",
   "main": "dist/index.js",
   "scripts": {
+    "start": "npm run storybook",
     "build": "webpack",
     "lint": "eslint ./ --ext .js --ext .ts --ext .jsx --ext .tsx",
     "lint:fix": "eslint ./ --ext .js --ext .ts --ext .jsx --ext .tsx --fix",
