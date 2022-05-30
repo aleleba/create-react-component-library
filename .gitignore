@@ -1,0 +1,4 @@
+#nodemodules
+node_modules
+.env
+dist
