@@ -1,6 +1,6 @@
 {
   "name": "@aleleba/create-react-component-library",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A starter kit for create a React component Library with storybook",
   "bin": "./bin/cli.js",
   "main": "dist/index.js",

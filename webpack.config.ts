@@ -28,6 +28,7 @@ export default {
     path: path.resolve(__dirname, 'dist'),
 	library: libraryName,
     libraryTarget: 'umd',
+	globalObject: 'this',
   },
   plugins: [
     new CleanWebpackPlugin(),
