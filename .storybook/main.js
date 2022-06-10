@@ -33,4 +33,7 @@ module.exports = {
       }
     }
   },
+  features: {
+    previewMdx2: true,
+  },
 }
