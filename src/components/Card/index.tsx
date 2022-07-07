@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import "./style.sass";
+import "./style.scss";
 
 type TCardProps = {
   /**
