@@ -45,8 +45,10 @@ export default {
   module: {
     rules: [
 		{ 
-			test: /\.(tsx|ts)$/, loader: "ts-loader", 
-			exclude: /node_modules/ 
+			test: /\.(tsx|ts)$/, 
+			loader: "ts-loader", 
+			exclude: /node_modules/,
+			options: { reportFiles: ['src/**/*.{ts,tsx}', '!src/**/*.stories.{ts,tsx}'] } 
 		},
 		{
 			test: /\.(js|jsx|ts|tsx)$/,
