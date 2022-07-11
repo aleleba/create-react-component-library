@@ -1,6 +1,6 @@
 {
   "name": "@aleleba/create-react-component-library",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A starter kit for create a React component Library with storybook",
   "bin": "./bin/cli.js",
   "main": "dist/index.js",
@@ -64,7 +64,7 @@
     "dotenv": "^16.0.1",
     "eslint": "^8.19.0",
     "eslint-plugin-react": "^7.30.1",
-    "eslint-plugin-storybook": "^0.5.13",
+    "eslint-plugin-storybook": "^0.6.0",
     "eslint-webpack-plugin": "^3.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^28.1.2",
