@@ -90,7 +90,7 @@ replaceTextOnFile({
             textReplace: `"version": "0.0.1",`
         },
         {
-            textToBeReplaced: `"name": "@aleleba/create-react-ssr",`, 
+            textToBeReplaced: `"name": "@aleleba/create-react-component-library",`, 
             textReplace: `"name": "${repoName}",`
         }
     ]
