@@ -48,6 +48,7 @@ It will create a dist folder and run:
 ```
 npm publish
 ```
+This will publish on npm your package.
 
 ## Cheers
 Hope you enjoy this proyect! Sincerely Alejandro Lembke Barrientos.
