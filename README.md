@@ -48,11 +48,6 @@ It will create a dist folder and run:
 ```
 npm publish
 ```
-This will publish on npm your package. (Remember to delete on package.json)
-```
-"bin": "./bin/cli.js",
-```
-and delete bin folder or modify node bash to use npx.
 
 ## Cheers
 Hope you enjoy this proyect! Sincerely Alejandro Lembke Barrientos.
