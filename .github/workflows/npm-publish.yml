@@ -12,7 +12,7 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
+      - run: npm ci --legacy-peer-deps
       - run: npm test
 
   publish-npm:
@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
+      - run: npm ci --legacy-peer-deps
       - run: npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
