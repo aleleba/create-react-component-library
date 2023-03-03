@@ -1,20 +1,24 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { Card } from '../Card';
+import { render, screen } from '@testing-library/react';
+import { Card } from '@components';
 
 describe('<App/> Component', () => {
     beforeEach(() => {
-        fetchMock.resetMocks();
+        // fetchMock.resetMocks();
+        render(<Card title='Test Title'><p>Test Content</p></Card>)
     });
-
-    test('Should render <Card /> Component', async () => {
-        fetchMock.mockResponseOnce(JSON.stringify({
+    it('Show Title', async () => {
+        /* fetchMock.mockResponseOnce(JSON.stringify({
             //First Data Fetch
             data: 'data'
-        }));
-
-        render(
-            <Card title='Test Title'><p>Test Content</p></Card>
-        )
+        })); */
+        screen.getByText('Test Title')
+    })
+    it('Show Child Component', async () => {
+        /* fetchMock.mockResponseOnce(JSON.stringify({
+            //First Data Fetch
+            data: 'data'
+        })); */
+        screen.getByText('Test Content')
     })
 })

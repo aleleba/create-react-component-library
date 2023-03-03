@@ -23,16 +23,18 @@
       "types": [
         "react/next", 
         "react-dom/next", 
-        "node"
+        "node",
+        "cypress"
       ],
       "sourceMap": true,
-      "baseUrl": "src",
+      "baseUrl": ".",
       "outDir": "dist",
       "skipLibCheck": true,
       "noImplicitAny": false,
       "paths": {
-        "@components/*": ["components/*"],
-      },
+        "@components/*": ["src/components/*"],
+        "@components": ["src/components"]
+      }
     },
     "include": [
       "**/*"
@@ -40,6 +42,6 @@
     "exclude": [
      "node_modules",
      "dist",
-     "PRNameGenerator.ts",
+     "PRNameGenerator.ts"
     ]
 }
