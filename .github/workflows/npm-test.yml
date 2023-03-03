@@ -30,6 +30,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5 # use the explicit version number
         with:
+          build: npm ci --legacy-peer-deps
           start: npm run cy:run
   test-build-package:
     needs: [ test, cypress-run ]
