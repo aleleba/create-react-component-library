@@ -14,9 +14,19 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm ci --legacy-peer-deps
       - run: npm test
-
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v5 # use the explicit version number
+        with:
+          start: npm run cy:run
   publish-npm:
-    needs: build
+    needs: [ build, cypress-run ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
