@@ -27,7 +27,7 @@ jobs:
         uses: cypress-io/github-action@v5 # use the explicit version number
         with:
           install: false
-          start: npm run cy:run
+          component: true
   publish-npm:
     needs: [ build, cypress-run ]
     runs-on: ubuntu-latest
