@@ -20,6 +20,8 @@ LIBRARY_NAME=ui-library
 EXTERNAL_CSS=true
 #External CSS NAME (Default: index.css)
 EXTERNAL_CSS_NAME=other_name.css
+#PREFIX URL (Default: '')
+PREFIX_URL=
 ```
 
 ### For Development
