@@ -65,7 +65,7 @@ jobs:
   # Job to publish the package to npm
   publish-npm:
     if: github.ref == 'refs/heads/master'
-    needs: [ build, cypress-run ]
+    needs: [ test, cypress-run ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
