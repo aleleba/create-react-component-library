@@ -1,0 +1,79 @@
+# This file contains the main workflow for the create-react-component-library project. It defines the steps and actions that are executed when a pull request is opened or pushed to the repository. The workflow includes building and testing the project, as well as deploying it to GitHub Pages if the build is successful.
+# Name of the workflow
+name: Testing package
+
+# Events that trigger the workflow
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: ['*']
+
+# Jobs that run as part of the workflow
+jobs:
+  # Job to run tests
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js 16
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'npm'
+        registry-url: https://registry.npmjs.org/
+    - run: npm ci
+    - run: npm test
+
+  # Job to run Cypress tests
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+          registry-url: https://registry.npmjs.org/
+      - name: Cypress install
+        run: npm install
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          install: false
+          component: true
+  
+  # Job to build the package
+  test-build-package:
+    if: github.ref != 'refs/heads/master'
+    needs: [ test, cypress-run ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
+      - run: npm ci --legacy-peer-deps
+      - run: npm run build
+  
+  # Job to publish the package to npm
+  publish-npm:
+    if: github.ref == 'refs/heads/master'
+    needs: [ build, cypress-run ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
+      - run: npm ci
+      - run: npm publish --access=public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
