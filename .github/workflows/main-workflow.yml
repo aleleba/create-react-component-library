@@ -11,8 +11,8 @@ on:
 
 # Jobs that run as part of the workflow
 jobs:
-  # Job to run tests
-  test:
+  # Job to run unit tests
+  unit-front-end-testing:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -29,8 +29,8 @@ jobs:
     - run: npm ci
     - run: npm test
 
-  # Job to run Cypress tests
-  cypress-run:
+  # Job to run Components Cypress tests
+  cypress-components-testing:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -51,7 +51,7 @@ jobs:
   # Job to build the package
   test-build-package:
     if: github.ref != 'refs/heads/master'
-    needs: [ test, cypress-run ]
+    needs: [ unit-front-end-testing, cypress-components-testing ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -65,7 +65,7 @@ jobs:
   # Job to publish the package to npm
   publish-npm:
     if: github.ref == 'refs/heads/master'
-    needs: [ test, cypress-run ]
+    needs: [ unit-front-end-testing, cypress-components-testing ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
