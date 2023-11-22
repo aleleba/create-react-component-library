@@ -6,7 +6,21 @@ const deFaultValues = {
 const prefixUrl =  process.env.PREFIX_URL ? process.env.PREFIX_URL : deFaultValues.PREFIX_URL
 module.exports = {
   "stories": ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
-  "addons": ["@storybook/addon-links", "@storybook/addon-essentials", "@storybook/addon-interactions", "@storybook/preset-scss"],
+  "addons": [
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-interactions",
+    {
+      name: '@storybook/preset-scss',
+      options: {
+        cssLoaderOptions: {
+          modules: {
+            auto: /\.module\.\w+$/i,
+          }
+        }
+      }
+    }
+  ],
   "webpackFinal": async config => {
     config.entry = config.entry.map(function(entry) {
       if (entry.includes("webpack-hot-middleware")) {
