@@ -56,7 +56,14 @@ export default {
 			test: /\.(css|sass|scss)$/,
 			use: [
 				externalCss === true ? MiniCssExtractPlugin.loader : 'style-loader',
-				'css-loader',
+				{
+					'loader': 'css-loader',
+					'options': {
+						modules: {
+							auto: /\.module\.\w+$/i,
+						}
+					},
+				},
 				'sass-loader',
 			], 
 		},
