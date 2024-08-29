@@ -22,6 +22,19 @@ module.exports = {
     }
   ],
   "webpackFinal": async config => {
+    config.module.rules.push(
+      {
+        test: /\.(ts|tsx)$/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+            },
+          },
+        ],
+      }
+    );
     config.entry = config.entry.map(function(entry) {
       if (entry.includes("webpack-hot-middleware")) {
         return `${require.resolve('webpack-hot-middleware/client')}?path=${prefixUrl}__webpack_hmr&reload=true`;
@@ -47,9 +60,6 @@ module.exports = {
         }
       }
     }
-  },
-  features: {
-    previewMdx2: true
   },
   docs: {
     autodocs: true
