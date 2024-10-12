@@ -56,11 +56,13 @@ export default {
 			use: [
 				externalCss === true ? MiniCssExtractPlugin.loader : 'style-loader',
 				{
-					'loader': 'css-loader',
-					'options': {
-						modules: {
-							auto: /\.module\.\w+$/i,
-						}
+					loader: 'css-loader',
+					options: {
+					modules: {
+						namedExport: false,
+						exportLocalsConvention: 'as-is',
+						auto: /\.module\.\w+$/i,
+					}
 					},
 				},
 				'sass-loader',
