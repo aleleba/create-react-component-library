@@ -1,40 +1,43 @@
 const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const deFaultValues = {
-	PREFIX_URL: ''
+  PREFIX_URL: ''
 }
-const prefixUrl =  process.env.PREFIX_URL ? process.env.PREFIX_URL : deFaultValues.PREFIX_URL
+const prefixUrl = process.env.PREFIX_URL ? process.env.PREFIX_URL : deFaultValues.PREFIX_URL;
+
 module.exports = {
-  "stories": ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
-  "addons": [
+  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
+  addons: [
+    "@storybook/addon-webpack5-compiler-babel",
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
     {
-      name: '@storybook/preset-scss',
+      name: '@storybook/addon-styling-webpack',
       options: {
-        cssLoaderOptions: {
-          modules: {
-            auto: /\.module\.\w+$/i,
+        rules: [
+          {
+            test: /\.(css|sass|scss)$/,
+            use: [
+              'style-loader',
+              {
+                loader: 'css-loader',
+                options: {
+                  modules: {
+                    namedExport: false,
+                    exportLocalsConvention: 'as-is',
+                    auto: /\.module\.\w+$/i,
+                  }
+                },
+              },
+              'sass-loader',
+            ],
           }
-        }
-      }
+        ]
+      },
     }
   ],
-  "webpackFinal": async config => {
-    config.module.rules.push(
-      {
-        test: /\.(ts|tsx)$/,
-        use: [
-          {
-            loader: 'ts-loader',
-            options: {
-              transpileOnly: true,
-            },
-          },
-        ],
-      }
-    );
+  webpackFinal: async config => {
     config.entry = config.entry.map(function(entry) {
       if (entry.includes("webpack-hot-middleware")) {
         return `${require.resolve('webpack-hot-middleware/client')}?path=${prefixUrl}__webpack_hmr&reload=true`;
@@ -48,7 +51,7 @@ module.exports = {
     config.resolve.plugins = [new TsconfigPathsPlugin()];
     return config;
   },
-  "framework": {
+  framework: {
     name: "@storybook/react-webpack5",
     options: {}
   },
@@ -60,6 +63,9 @@ module.exports = {
         }
       }
     }
+  },
+  features: {
+    previewMdx2: true
   },
   docs: {
     autodocs: true
