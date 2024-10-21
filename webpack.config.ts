@@ -44,13 +44,16 @@ export default {
   ],
   module: {
     rules: [
-		{
-			test: /\.(js|jsx|ts|tsx)$/,
-			exclude: /node_modules/,
-			use: {
-				loader: 'babel-loader',
-			},
-		},
+    {
+      test: /\.(ts|tsx)$/,
+      exclude: /node_modules/,
+      use: 'ts-loader',
+    },
+    {
+      test: /\.(js|jsx)$/,
+      exclude: /node_modules/,
+      use: 'babel-loader',
+    },
 		{
 			test: /\.(css|sass|scss)$/,
 			use: [
