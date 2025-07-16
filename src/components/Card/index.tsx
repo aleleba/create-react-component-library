@@ -9,7 +9,7 @@ type TCardProps = {
   /**
    * Is this the child component of the card. (The content)
    */
-  children?: JSX.Element,
+  children?: React.ReactNode,
 };
 
 const Card: FC<TCardProps> = ({ title, children}) => {

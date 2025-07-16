@@ -25,8 +25,7 @@
       "types": [
         "react", 
         "react-dom", 
-        "node",
-        "cypress"
+        "node"
       ],
       "sourceMap": true,
       "baseUrl": ".",
@@ -45,6 +44,9 @@
      "node_modules",
      "dist",
      "PRNameGenerator.ts",
-     "cypress.config.ts"
+     "**/*.test.tsx",
+     "**/*.test.ts",
+     "**/*.cy.tsx",
+     "**/*.cy.ts"
     ]
 }

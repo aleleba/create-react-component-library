@@ -46,7 +46,7 @@ export default {
     rules: [
     {
       test: /\.(ts|tsx)$/,
-      exclude: /node_modules/,
+      exclude: [/node_modules/, /\.test\.(ts|tsx)$/, /\.cy\.(ts|tsx)$/],
       use: 'ts-loader',
     },
     {
