@@ -7,36 +7,32 @@ const prefixUrl = process.env.PREFIX_URL ? process.env.PREFIX_URL : deFaultValue
 
 module.exports = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
-  addons: [
-    "@storybook/addon-webpack5-compiler-babel",
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-interactions",
-    {
-      name: '@storybook/addon-styling-webpack',
-      options: {
-        rules: [
-          {
-            test: /\.(css|sass|scss)$/,
-            use: [
-              'style-loader',
-              {
-                loader: 'css-loader',
-                options: {
-                  modules: {
-                    namedExport: false,
-                    exportLocalsConvention: 'as-is',
-                    auto: /\.module\.\w+$/i,
-                  }
-                },
+
+  addons: ["@storybook/addon-webpack5-compiler-babel", "@storybook/addon-links", {
+    name: '@storybook/addon-styling-webpack',
+    options: {
+      rules: [
+        {
+          test: /\.(css|sass|scss)$/,
+          use: [
+            'style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                modules: {
+                  namedExport: false,
+                  exportLocalsConvention: 'as-is',
+                  auto: /\.module\.\w+$/i,
+                }
               },
-              'sass-loader',
-            ],
-          }
-        ]
-      },
-    }
-  ],
+            },
+            'sass-loader',
+          ],
+        }
+      ]
+    },
+  }, "@storybook/addon-docs"],
+
   webpackFinal: async config => {
     config.entry = config.entry.map(function(entry) {
       if (entry.includes("webpack-hot-middleware")) {
@@ -51,10 +47,12 @@ module.exports = {
     config.resolve.plugins = [new TsconfigPathsPlugin()];
     return config;
   },
+
   framework: {
     name: "@storybook/react-webpack5",
     options: {}
   },
+
   typescript: {
     reactDocgenTypescriptOptions: {
       compilerOptions: {
@@ -63,11 +61,5 @@ module.exports = {
         }
       }
     }
-  },
-  features: {
-    previewMdx2: true
-  },
-  docs: {
-    autodocs: true
   }
 };
