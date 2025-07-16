@@ -43,10 +43,6 @@
     "exclude": [
      "node_modules",
      "dist",
-     "PRNameGenerator.ts",
-     "**/*.test.tsx",
-     "**/*.test.ts",
-     "**/*.cy.tsx",
-     "**/*.cy.ts"
+     "PRNameGenerator.ts"
     ]
 }

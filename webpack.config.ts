@@ -47,7 +47,17 @@ export default {
     {
       test: /\.(ts|tsx)$/,
       exclude: [/node_modules/, /\.test\.(ts|tsx)$/, /\.cy\.(ts|tsx)$/],
-      use: 'ts-loader',
+      use: {
+        loader: 'ts-loader',
+        options: {
+          onlyCompileBundledFiles: true,
+          compilerOptions: {
+            noEmit: false,
+            declaration: true,
+            declarationDir: './dist/types'
+          }
+        }
+      },
     },
     {
       test: /\.(js|jsx)$/,
