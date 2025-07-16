@@ -67,7 +67,7 @@ if(!checkedOut) process.exit(-1);
 
 const actualVersion = runCommandWithOutput(`cd ${repoName} && node -p "require('./package.json').version"`).toString().trim()
 
-const installDepsCommand = `cd ${repoName} && npm install`;
+const installDepsCommand = `cd ${repoName} && npm install --legacy-peer-deps`;
 const cleanGitHistoryCommand = `cd ${repoName} && rm -rf .git && git init && git add --all -- ":!.github" ":!bin" && git commit -m "Initial commit"`
 const cleanGitHistoryCommandWindows = `cd ${repoName} && rmdir .git /s /q && git init && git add --all -- ":!.github" ":!bin" && git commit -m "Initial commit"`
 const deleteFoldersCommand = `cd ${repoName} && rm -rf .github && rm -rf bin`

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import { Card } from '@components';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
