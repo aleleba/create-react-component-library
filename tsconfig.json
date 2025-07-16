@@ -43,6 +43,7 @@
     "exclude": [
      "node_modules",
      "dist",
-     "PRNameGenerator.ts"
+     "PRNameGenerator.ts",
+     "cypress.config.ts"
     ]
 }
