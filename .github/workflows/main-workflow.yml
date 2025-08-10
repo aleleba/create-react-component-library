@@ -41,7 +41,7 @@ jobs:
           cache: 'npm'
           registry-url: https://registry.npmjs.org/
       - name: Cypress install
-        run: npm install
+        run: npm i
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
@@ -59,7 +59,7 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
-      - run: npm ci --legacy-peer-deps
+      - run: npm ci
       - run: npm run build
   
   # Job to publish the package to npm

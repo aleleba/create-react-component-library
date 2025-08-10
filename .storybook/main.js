@@ -59,7 +59,23 @@ module.exports = {
         "paths": {
           "@Components/*": ["Components/*"]
         }
+      },
+      propFilter: (prop) => {
+        // Filter out props that might contain Symbol values
+        if (prop.name && typeof prop.name === 'symbol') {
+          return false;
+        }
+        // Filter out React internal props that might cause issues
+        if (prop.name && prop.name.startsWith('$$')) {
+          return false;
+        }
+        return true;
       }
     }
+  },
+
+  docs: {
+    autodocs: 'tag',
+    defaultName: 'Docs',
   }
 };
