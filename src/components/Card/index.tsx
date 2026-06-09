@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import "./style.scss";
+import React, { FC } from 'react';
+import './style.scss';
 
 type TCardProps = {
   /**
@@ -13,13 +13,13 @@ type TCardProps = {
 };
 
 const Card: FC<TCardProps> = ({ title, children}) => {
-  return (
-    <div className="Card">
-      <div className="Title">{title}</div>
+	return (
+		<div className="Card">
+			<div className="Title">{title}</div>
 
-      <div className="Content">{children}</div>
-    </div>
-  );
+			<div className="Content">{children}</div>
+		</div>
+	);
 };
 
-export { Card, TCardProps }
+export { Card, TCardProps };

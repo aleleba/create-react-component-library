@@ -5,16 +5,16 @@
 import '@testing-library/jest-dom';
 
 //import fetch Mock
-import fetchMock from "jest-fetch-mock";
+import fetchMock from 'jest-fetch-mock';
 fetchMock.enableMocks();
 
 //Fixing Pollyfill for react-slick
 window.matchMedia =
 window.matchMedia ||
 function() {
-    return {
-        matches: false,
-        addListener: function() {},
-        removeListener: function() {}
-    };
+	return {
+		matches: false,
+		addListener: function() {},
+		removeListener: function() {}
+	};
 };
