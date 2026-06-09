@@ -10,92 +10,92 @@ import ESLintPlugin from 'eslint-webpack-plugin';
 import { resolveTsAliases } from 'resolve-ts-aliases';
 
 const dotEnvToParse = dotenv.config();
-const libraryName = process.env.LIBRARY_NAME ? process.env.LIBRARY_NAME : "ui-library"
-const externalCss = process.env.EXTERNAL_CSS === 'true' ? true : false
-const externalCssName = process.env.EXTERNAL_CSS_NAME ? process.env.EXTERNAL_CSS_NAME : 'index.css'
+const libraryName = process.env.LIBRARY_NAME ? process.env.LIBRARY_NAME : 'ui-library';
+const externalCss = process.env.EXTERNAL_CSS === 'true' ? true : false;
+const externalCssName = process.env.EXTERNAL_CSS_NAME ? process.env.EXTERNAL_CSS_NAME : 'index.css';
 const alias = resolveTsAliases(path.resolve('tsconfig.json'));
 
 export default {
-  entry: './src/components/index.tsx',
-  externals: [nodeExternals()],
-  resolve: {
-    extensions: ['.js', '.jsx','.ts','.tsx', '.json'],
-    alias,
-  },
-  mode: 'production',
-  output: {
-    filename: 'index.js',
-    path: path.resolve(__dirname, 'dist'),
+	entry: './src/components/index.tsx',
+	externals: [nodeExternals()],
+	resolve: {
+		extensions: ['.js', '.jsx','.ts','.tsx', '.json'],
+		alias,
+	},
+	mode: 'production',
+	output: {
+		filename: 'index.js',
+		path: path.resolve(__dirname, 'dist'),
 		library: libraryName,
-    libraryTarget: 'umd',
+		libraryTarget: 'umd',
 		globalObject: 'this',
-  },
-  plugins: [
-    new CleanWebpackPlugin(),
-    ...(externalCss === true ? [
-        new MiniCssExtractPlugin({
-            filename: externalCssName,
-        }),
-    ] : []),
-	new webpack.DefinePlugin({
-		'process.env': JSON.stringify(dotEnvToParse.parsed),
-	}),
-    new ESLintPlugin(),
-  ],
-  module: {
-    rules: [
-    {
-      test: /\.(ts|tsx)$/,
-      exclude: [/node_modules/, /\.test\.(ts|tsx)$/, /\.cy\.(ts|tsx)$/],
-      use: {
-        loader: 'ts-loader',
-        options: {
-          onlyCompileBundledFiles: true,
-          compilerOptions: {
-            noEmit: false,
-            declaration: true,
-            declarationDir: './dist/types'
-          }
-        }
-      },
-    },
-    {
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      use: 'babel-loader',
-    },
-		{
-			test: /\.(css|sass|scss)$/,
-			use: [
-				externalCss === true ? MiniCssExtractPlugin.loader : 'style-loader',
-				{
-					loader: 'css-loader',
+	},
+	plugins: [
+		new CleanWebpackPlugin(),
+		...(externalCss === true ? [
+			new MiniCssExtractPlugin({
+				filename: externalCssName,
+			}),
+		] : []),
+		new webpack.DefinePlugin({
+			'process.env': JSON.stringify(dotEnvToParse.parsed),
+		}),
+		new ESLintPlugin(),
+	],
+	module: {
+		rules: [
+			{
+				test: /\.(ts|tsx)$/,
+				exclude: [/node_modules/, /\.test\.(ts|tsx)$/, /\.cy\.(ts|tsx)$/],
+				use: {
+					loader: 'ts-loader',
 					options: {
-					modules: {
-						namedExport: false,
-						exportLocalsConvention: 'as-is',
-						auto: /\.module\.\w+$/i,
+						onlyCompileBundledFiles: true,
+						compilerOptions: {
+							noEmit: false,
+							declaration: true,
+							declarationDir: './dist/types'
+						}
 					}
-					},
 				},
-				'sass-loader',
-			], 
-		},
-      	{
-			test: /\.(ttf|otf|eot|woff|woff2)$/,
-			loader: 'url-loader',
-			options: {
-				name: 'assets/fonts/[name].[ext]',
-				esModule: false,
 			},
-		},
-    ]
-  },
-  optimization: {
+			{
+				test: /\.(js|jsx)$/,
+				exclude: /node_modules/,
+				use: 'babel-loader',
+			},
+			{
+				test: /\.(css|sass|scss)$/,
+				use: [
+					externalCss === true ? MiniCssExtractPlugin.loader : 'style-loader',
+					{
+						loader: 'css-loader',
+						options: {
+							modules: {
+								namedExport: false,
+								exportLocalsConvention: 'as-is',
+								auto: /\.module\.\w+$/i,
+							}
+						},
+					},
+					'sass-loader',
+				], 
+			},
+      	{
+				test: /\.(ttf|otf|eot|woff|woff2)$/,
+				loader: 'url-loader',
+				options: {
+					name: 'assets/fonts/[name].[ext]',
+					esModule: false,
+				},
+			},
+		]
+	},
+	optimization: {
 		minimize: true,
 		minimizer: [
 			new CssMinimizerPlugin(),
 			new TerserPlugin(),
 		],
 	},
-}
+};

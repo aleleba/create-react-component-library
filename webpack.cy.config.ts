@@ -10,83 +10,83 @@ import ESLintPlugin from 'eslint-webpack-plugin';
 import { resolveTsAliases } from 'resolve-ts-aliases';
 
 const dotEnvToParse = dotenv.config();
-const externalCss = process.env.EXTERNAL_CSS === 'true' ? true : false
-const externalCssName = process.env.EXTERNAL_CSS_NAME ? process.env.EXTERNAL_CSS_NAME : 'index.css'
+const externalCss = process.env.EXTERNAL_CSS === 'true' ? true : false;
+const externalCssName = process.env.EXTERNAL_CSS_NAME ? process.env.EXTERNAL_CSS_NAME : 'index.css';
 const alias = resolveTsAliases(path.resolve('tsconfig.json'));
 
 export default {
-  entry: './src/components/index.tsx',
-  resolve: {
-    extensions: ['.js', '.jsx','.ts','.tsx', '.json'],
-    alias,
-  },
-  mode: 'development',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-  },
+	entry: './src/components/index.tsx',
+	resolve: {
+		extensions: ['.js', '.jsx','.ts','.tsx', '.json'],
+		alias,
+	},
+	mode: 'development',
+	output: {
+		path: path.resolve(__dirname, 'dist'),
+	},
 	target: 'web',
-  plugins: [
-    new CleanWebpackPlugin(),
-    ...(externalCss === true ? [
-        new MiniCssExtractPlugin({
-            filename: externalCssName,
-        }),
-    ] : []),
+	plugins: [
+		new CleanWebpackPlugin(),
+		...(externalCss === true ? [
+			new MiniCssExtractPlugin({
+				filename: externalCssName,
+			}),
+		] : []),
 		new webpack.DefinePlugin({
 			'process.env': JSON.stringify(dotEnvToParse.parsed),
 		}),
-    new ESLintPlugin(),
+		new ESLintPlugin(),
 		new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'public', 'index.html'),
-    }),
-    new webpack.ProvidePlugin({
-      React: 'react',
-    }),
-  ],
-  module: {
-    rules: [
-		{
-			test: /\.(ts|tsx)$/,
-			exclude: /node_modules/,
-			use: 'ts-loader',
+			template: path.join(__dirname, 'public', 'index.html'),
+		}),
+		new webpack.ProvidePlugin({
+			React: 'react',
+		}),
+	],
+	module: {
+		rules: [
+			{
+				test: /\.(ts|tsx)$/,
+				exclude: /node_modules/,
+				use: 'ts-loader',
 		  },
 		  {
-			test: /\.(js|jsx)$/,
-			exclude: /node_modules/,
-			use: 'babel-loader',
-		},
-		{
-			test: /\.(css|sass|scss)$/,
-			use: [
-				externalCss === true ? MiniCssExtractPlugin.loader : 'style-loader',
-				{
-					loader: 'css-loader',
-					options: {
-					modules: {
-						namedExport: false,
-						exportLocalsConvention: 'as-is',
-						auto: /\.module\.\w+$/i,
-					}
-					},
-				},
-				'sass-loader',
-			], 
-		},
-      	{
-			test: /\.(ttf|otf|eot|woff|woff2)$/,
-			loader: 'url-loader',
-			options: {
-				name: 'assets/fonts/[name].[ext]',
-				esModule: false,
+				test: /\.(js|jsx)$/,
+				exclude: /node_modules/,
+				use: 'babel-loader',
 			},
-		},
-    ]
-  },
-  optimization: {
+			{
+				test: /\.(css|sass|scss)$/,
+				use: [
+					externalCss === true ? MiniCssExtractPlugin.loader : 'style-loader',
+					{
+						loader: 'css-loader',
+						options: {
+							modules: {
+								namedExport: false,
+								exportLocalsConvention: 'as-is',
+								auto: /\.module\.\w+$/i,
+							}
+						},
+					},
+					'sass-loader',
+				], 
+			},
+      	{
+				test: /\.(ttf|otf|eot|woff|woff2)$/,
+				loader: 'url-loader',
+				options: {
+					name: 'assets/fonts/[name].[ext]',
+					esModule: false,
+				},
+			},
+		]
+	},
+	optimization: {
 		minimize: true,
 		minimizer: [
 			new CssMinimizerPlugin(),
 			new TerserPlugin(),
 		],
 	},
-}
+};

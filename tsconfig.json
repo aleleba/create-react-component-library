@@ -1,7 +1,9 @@
 {
     "compilerOptions": {
+      "ignoreDeprecations": "6.0",
       "declaration": true,
       "declarationDir": "./dist/types",
+      "rootDir": "./src/components",
       "target": "es5",
       "lib": [
         "dom",
@@ -38,7 +40,8 @@
       }
     },
     "include": [
-      "."
+      "src/components",
+      "src/@types"
     ],
     "exclude": [
      "node_modules",
