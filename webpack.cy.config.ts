@@ -48,7 +48,10 @@ export default {
 			{
 				test: /\.(ts|tsx)$/,
 				exclude: /node_modules/,
-				use: 'ts-loader',
+				use: {
+				loader: 'ts-loader',
+				options: { transpileOnly: true },
+			},
 		  },
 		  {
 				test: /\.(js|jsx)$/,
