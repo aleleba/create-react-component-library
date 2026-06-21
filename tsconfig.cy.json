@@ -1,12 +1,18 @@
 {
 	"extends": "./tsconfig.json",
 	"compilerOptions": {
-		"rootDir": ".",
-"types": ["cypress", "node"]
+		"rootDir": "."
 	},
 	"include": [
 		"src",
 		"cypress",
 		"src/@types"
+	],
+	"exclude": [
+		"node_modules",
+		"dist",
+		"**/*.stories.*",
+		"**/*.test.ts",
+		"**/*.test.tsx"
 	]
 }
