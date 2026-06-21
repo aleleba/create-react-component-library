@@ -22,7 +22,7 @@ export default {
 	},
 	mode: 'development',
 	output: {
-		path: path.resolve(__dirname, 'dist'),
+		path: path.resolve('dist'),
 	},
 	target: 'web',
 	plugins: [
@@ -37,7 +37,7 @@ export default {
 		}),
 		new ESLintPlugin(),
 		new HtmlWebpackPlugin({
-			template: path.join(__dirname, 'public', 'index.html'),
+			template: path.join('public', 'index.html'),
 		}),
 		new webpack.ProvidePlugin({
 			React: 'react',

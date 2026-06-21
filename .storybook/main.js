@@ -77,5 +77,30 @@ module.exports = {
 	docs: {
 		autodocs: 'tag',
 		defaultName: 'Docs',
-	}
+	},
+
+	// Babel 8 removed the `bugfixes` option from @babel/preset-env (it's now always on).
+	// Storybook injects bugfixes:true in its internal overrides AFTER babelDefault, so we
+	// strip it here in the `babel` hook which runs after all presets have composed the config.
+	async babel(config) {
+		const stripBugfixes = preset => {
+			if (!Array.isArray(preset)) return preset;
+			const [name, options] = preset;
+			if (typeof name === 'string' && name.includes('@babel/preset-env') && options?.bugfixes !== undefined) {
+				const { bugfixes: _removed, ...rest } = options;
+				return [name, rest];
+			}
+			return preset;
+		};
+		if (config.presets) {
+			config.presets = config.presets.map(stripBugfixes);
+		}
+		if (config.overrides) {
+			config.overrides = config.overrides.map(override => {
+				if (!override.presets) return override;
+				return { ...override, presets: override.presets.map(stripBugfixes) };
+			});
+		}
+		return config;
+	},
 };
