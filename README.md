@@ -2,6 +2,23 @@
 
 This project aims to have a starter kit for creating a new React Library with storybook.
 
+## Tech stack
+Current package version: **1.4.3** (Node 24 in CI).
+
+| Tool | Version |
+| --- | --- |
+| React / React DOM | 19.3.1 |
+| TypeScript | 6.0.3 |
+| Webpack / webpack-cli | 5.112.0 / 7.2.3 |
+| Babel | 8.0.7 |
+| Storybook | 10.6.2 |
+| Jest / ts-jest | 30.5.2 / 29.4.15 |
+| Cypress | 16.2.0 |
+| ESLint / typescript-eslint | 9.39.5 / 8.71.2 |
+| Sass | 1.105.2 |
+
+TypeScript and ESLint are kept on their current major on purpose: `ts-jest` and `typescript-eslint` do not support TypeScript 7 yet, and `eslint-plugin-react` does not support ESLint 10 yet.
+
 ## Setup
 To create a new project run in the terminal:
 ```

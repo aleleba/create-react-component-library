@@ -49,9 +49,9 @@ export default {
 				test: /\.(ts|tsx)$/,
 				exclude: /node_modules/,
 				use: {
-				loader: 'ts-loader',
-				options: { configFile: 'tsconfig.cy.json' },
-			},
+					loader: 'ts-loader',
+					options: { configFile: 'tsconfig.cy.json' },
+				},
 		  },
 		  {
 				test: /\.(js|jsx)$/,
