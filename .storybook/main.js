@@ -87,7 +87,8 @@ module.exports = {
 			if (!Array.isArray(preset)) return preset;
 			const [name, options] = preset;
 			if (typeof name === 'string' && name.includes('@babel/preset-env') && options?.bugfixes !== undefined) {
-				const { bugfixes: _removed, ...rest } = options;
+				const rest = { ...options };
+				delete rest.bugfixes;
 				return [name, rest];
 			}
 			return preset;
